@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="sidebar">
+    <h4>Registration Steps</h4>
+    <ul>
+      <li *ngFor="let step of steps; let i = index" [class.active]="currentStep === i + 1">
+        <span class="circle">{{ i + 1 }}</span> {{ step }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <h4>{{ steps[currentStep - 1] }}</h4>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div *ngIf="currentStep === 1">
+        <input class="form-control" placeholder="First Name" formControlName="firstName" />
+        <input class="form-control" placeholder="Last Name" formControlName="lastName" />
+      </div>
+
+      <div *ngIf="currentStep === 2">
+        <input class="form-control" placeholder="Bank Name" formControlName="bankName" />
+        <input class="form-control" placeholder="Account Number" formControlName="accountNumber" />
+      </div>
+
+      <div *ngIf="currentStep === 3">
+        <input class="form-control" placeholder="Upload Document" formControlName="documents" />
+      </div>
+
+      <div *ngIf="currentStep === 4">
+        <h5>Review Information</h5>
+        <pre>{{ form.value | json }}</pre>
+      </div>
+
+      <div class="actions">
+        <button type="button" (click)="prevStep()" [disabled]="currentStep === 1">Back</button>
+        <button type="button" (click)="nextStep()" *ngIf="currentStep < steps.length">Next</button>
+        <button type="submit" *ngIf="currentStep === steps.length">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

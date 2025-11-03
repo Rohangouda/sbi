@@ -1,0 +1,25 @@
+<div class="container">
+  <app-accountingtype (typeSelected)="onTypeSelected($event)"></app-accountingtype>
+
+  <div *ngIf="showAccountInput || showForm" class="account-box">
+    <label>Enter Account Number:</label>
+    <input type="text" [(ngModel)]="accountNumber" placeholder="Enter account number" />
+    <button (click)="submitAccount()">Submit</button>
+  </div>
+
+  <div *ngIf="showDropdown" class="dropdown-box">
+    <label><strong>Select Transaction Type:</strong></label>
+    <ng-multiselect-dropdown
+      [placeholder]="'Select Transaction Type'"
+      [settings]="dropdownSettings"
+      [data]="dropdownList"
+      [(ngModel)]="selectedItems"
+      (onSelect)="onItemSelect($event)"
+      (onSelectAll)="onSelectAll($event)">
+    </ng-multiselect-dropdown>
+  </div>
+
+
+  <app-form *ngIf="showForm && cifSubmitted"></app-form>
+
+</div>

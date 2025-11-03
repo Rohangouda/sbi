@@ -1,0 +1,17 @@
+<div class="card-container">
+  <div
+    class="card"
+    [class.selected]="selectedCard === 'buy'"
+    (click)="selectCard('buy')">
+    <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Buy" />
+    <h5>Buy (Inward)</h5>
+  </div>
+
+  <div
+    class="card"
+    [class.selected]="selectedCard === 'sell'"
+    (click)="selectCard('sell')">
+    <img src="https://cdn-icons-png.flaticon.com/512/992/992680.png" alt="Sell" />
+    <h5>Sell (Outward)</h5>
+  </div>
+</div>

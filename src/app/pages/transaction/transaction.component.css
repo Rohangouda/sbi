@@ -1,0 +1,36 @@
+.container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.account-box {
+  margin-top: 40px;
+}
+
+.account-box input {
+  padding: 8px;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid #007bff;
+  margin-right: 10px;
+}
+
+.account-box button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.account-box button:hover {
+  background-color: #0056b3;
+}
+
+.dropdown-box {
+  margin-top: 30px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
