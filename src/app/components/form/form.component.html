@@ -13,13 +13,66 @@
 
     <form [formGroup]="form" (ngSubmit)="submit()">
       <div *ngIf="currentStep === 1">
+          <label>Select Account Number:</label>
+        <select class="form-control" formControlName="accountId" (change)="onAccountSelect($event)">
+          <option value="" disabled selected>Select Account</option>
+          <option *ngFor="let acc of accountList" [value]="acc.id">
+            {{ acc.id }} - {{ acc.name }}
+          </option>
+        </select>
+
+        <!-- Account details card -->
+        <div *ngIf="selectedAccount" class="account-card">
+          <h5>{{ selectedAccount.name }}</h5>
+          <p><strong>Branch:</strong> {{ selectedAccount.branch }}</p>
+          <p><strong>Type:</strong> {{ selectedAccount.type }}</p>
+          <p><strong>Balance:</strong> ₹{{ selectedAccount.balance | number : '1.2-2' }}</p>
+        </div>
         <input class="form-control" placeholder="First Name" formControlName="firstName" />
         <input class="form-control" placeholder="Last Name" formControlName="lastName" />
       </div>
 
       <div *ngIf="currentStep === 2">
-        <input class="form-control" placeholder="Bank Name" formControlName="bankName" />
-        <input class="form-control" placeholder="Account Number" formControlName="accountNumber" />
+      <h5>Choose Rate Type:</h5>
+        <div class="radio-group">
+          <label><input type="radio" value="Online" formControlName="rateType" /> Online</label>
+          <label><input type="radio" value="Card" formControlName="rateType" /> Card</label>
+          <label><input type="radio" value="Dealer Rate" formControlName="rateType" /> Dealer Rate</label>
+          <label><input type="radio" value="Order Board" formControlName="rateType" /> Order Board</label>
+        </div>
+
+        <!-- Shown only for specific transaction types -->
+        <div *ngIf="selectedTransactionType === 'Account to Account' || selectedTransactionType === 'Account to FTC'" class="extra-section">
+          <h5>Transfer Options</h5>
+          <label><input type="checkbox" checked /> Charges</label>
+          <label><input type="checkbox" checked /> Exchange Charges</label>
+
+          <!-- FTC specific -->
+          <div *ngIf="selectedTransactionType === 'Account to FTC'">
+            <input class="form-control" type="number" formControlName="usdAmount" placeholder="Enter Amount (USD)" />
+
+            <div class="accordion">
+              <div class="accordion-item">
+                <div class="accordion-header">Beneficiary Details</div>
+                <div class="accordion-body" [formGroup]="form.get('beneficiary')">
+                  <input class="form-control" placeholder="Beneficiary Name" formControlName="name" />
+                  <input class="form-control" placeholder="Bank Name" formControlName="bank" />
+                  <input class="form-control" placeholder="IFSC Code" formControlName="ifsc" />
+                </div>
+              </div>
+            </div>
+
+            <div class="summary-card">
+              <h5>Calculation Summary</h5>
+              <p><strong>FTC (₹):</strong> {{ calculations.ftcAmount | number:'1.2-2' }}</p>
+              <p><strong>Account (₹):</strong> {{ calculations.accountAmt }}</p>
+              <p><strong>Charges:</strong> ₹{{ calculations.charges }}</p>
+              <p><strong>Exchange Charges:</strong> ₹{{ calculations.exchCharges }}</p>
+              <hr />
+              <p><strong>Total Payable:</strong> ₹{{ calculations.total | number:'1.2-2' }}</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div *ngIf="currentStep === 3">
