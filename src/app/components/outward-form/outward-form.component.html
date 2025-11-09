@@ -1,0 +1,245 @@
+<!-- <mat-card class="outward-main-card">
+  <div class="row g-0">
+
+    <div class="col-md-3 stepper-sidebar p-3 text-white">
+      <h6 class="text-center mb-3">Outward Transfer Wizard</h6>
+      <ul class="list-unstyled mt-3">
+        <li *ngFor="let s of steps"
+            [class.active]="step===s.number"
+            (click)="goToStep(s.number)">
+          <span>{{ s.title }}</span>
+          <mat-icon *ngIf="step > s.number" class="tick-icon">check_circle</mat-icon>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-9 p-4">
+
+      <div *ngIf="step===1">
+        <mat-card class="inner-card">
+          <h5 class="fw-bold text-primary mb-3">Select Funding Account</h5>
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Select Account</mat-label>
+            <mat-select [(ngModel)]="selectedAccount" (selectionChange)="showAccountDetails($event.value)">
+              <mat-option *ngFor="let a of accounts" [value]="a">
+                {{a.accountNumber}} - {{a.type}} (₹{{a.balance | number}})
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-card *ngIf="accountDetails" class="inner-card mt-3 p-3">
+            <h6 class="fw-bold text-secondary mb-2">Account Information</h6>
+            <div class="row">
+              <div class="col-md-6"><strong>Account No:</strong> {{accountDetails.accountNumber}}</div>
+              <div class="col-md-6"><strong>CIF No:</strong> {{accountDetails.cif}}</div>
+              <div class="col-md-6"><strong>IFSC:</strong> {{accountDetails.ifsc}}</div>
+              <div class="col-md-6"><strong>Branch:</strong> {{accountDetails.branch}}</div>
+              <div class="col-md-6"><strong>Product:</strong> {{accountDetails.product}}</div>
+              <div class="col-md-6"><strong>Balance:</strong> ₹{{accountDetails.balance | number}}
+              </div>
+            </div>
+          </mat-card>
+
+          <div class="text-end mt-4">
+            <button mat-flat-button color="primary" class="btn-next"
+                    (click)="next()" [disabled]="!selectedAccount">
+              Next
+            </button>
+          </div>
+        </mat-card>
+      </div>
+
+     
+      <div *ngIf="step===2">
+        <mat-card class="inner-card">
+          <h5 class="fw-bold text-primary mb-3">Transaction Details</h5>
+
+          <mat-tab-group [(selectedIndex)]="selectedTabIndex" animationDuration="300ms">
+         
+            <mat-tab label="Beneficiary">
+              <div class="mt-3">
+                <h6 class="fw-semibold mb-2">Add Beneficiary</h6>
+                <div class="row g-2">
+                  <div class="col-md-3"><input [(ngModel)]="beneficiary.acc" class="form-control" placeholder="Account No"></div>
+                  <div class="col-md-3"><input [(ngModel)]="beneficiary.name" class="form-control" placeholder="Name"></div>
+                  <div class="col-md-2"><input [(ngModel)]="beneficiary.branch" class="form-control" placeholder="Branch"></div>
+                  <div class="col-md-2"><input [(ngModel)]="beneficiary.amt" class="form-control" placeholder="Amount"></div>
+                  <div class="col-md-2 text-end">
+                    <button mat-stroked-button color="primary" (click)="addBeneficiary()">Add</button>
+                  </div>
+                </div>
+
+                <div *ngFor="let b of beneficiaries" class="card p-2 mt-2">
+                  {{b.acc}} — {{b.name}} — {{b.branch}} — ₹{{b.amt}}
+                </div>
+              </div>
+            </mat-tab>
+
+       
+            <mat-tab label="FTC Cards">
+              <div class="mt-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Select FTC Card</mat-label>
+                  <mat-select [(ngModel)]="ftc.card">
+                    <mat-option *ngFor="let f of ftcCards" [value]="f">{{f}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div class="row g-2">
+                  <div class="col-md-5"><input [(ngModel)]="ftc.amount" class="form-control" placeholder="Amount"></div>
+                  <div class="col-md-5"><input [(ngModel)]="ftc.currency" class="form-control" placeholder="Currency"></div>
+                  <div class="col-md-2 text-end">
+                    <button mat-stroked-button color="primary" (click)="addFtc()">Add</button>
+                  </div>
+                </div>
+
+                <div *ngFor="let f of ftcEntries" class="card p-2 mt-2">{{f.card}} — {{f.amount}} {{f.currency}}</div>
+              </div>
+            </mat-tab>
+
+        
+            <mat-tab label="FCNB">
+              <div class="mt-3">
+                <div class="row g-2">
+                  <div class="col-md-5"><input [(ngModel)]="fcnc.amount" class="form-control" placeholder="Amount"></div>
+                  <div class="col-md-5"><input [(ngModel)]="fcnc.currency" class="form-control" placeholder="Currency"></div>
+                  <div class="col-md-2 text-end">
+                    <button mat-stroked-button color="primary" (click)="addFcnc()">Add</button>
+                  </div>
+                </div>
+                <div *ngFor="let c of fcncEntries" class="card p-2 mt-2">{{c.amount}} {{c.currency}}</div>
+              </div>
+            </mat-tab>
+
+           
+            <mat-tab label="Cash">
+              <div class="mt-3">
+                <div class="row g-2">
+                  <div class="col-md-6"><input [(ngModel)]="cash.amount" class="form-control" placeholder="Amount"></div>
+                  <div class="col-md-4"><input [(ngModel)]="cash.currency" class="form-control" placeholder="Currency"></div>
+                  <div class="col-md-2 text-end">
+                    <button mat-stroked-button color="primary" (click)="addCash()">Add</button>
+                  </div>
+                </div>
+                <div *ngFor="let c of cashEntries" class="card p-2 mt-2">{{c.amount}} {{c.currency}}</div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+
+       
+          <mat-card class="inner-card mt-4">
+            <h6 class="fw-semibold">Select Rate Type</h6>
+            <mat-radio-group [(ngModel)]="rateType" class="d-flex gap-3 flex-wrap mt-2">
+              <mat-radio-button value="Online">Online</mat-radio-button>
+              <mat-radio-button value="Card">Card</mat-radio-button>
+              <mat-radio-button value="Dealer">Dealer</mat-radio-button>
+              <mat-radio-button value="Order">Order Board</mat-radio-button>
+            </mat-radio-group>
+
+            <button mat-flat-button color="primary" class="mt-3 fetch-btn" (click)="fetchRate()">Fetch Rate</button>
+
+            <div *ngIf="calculation" class="mt-3">
+              <h6 class="fw-bold mb-2 text-primary">Transaction Summary</h6>
+              <div *ngFor="let key of calculationKeys" class="d-flex justify-content-between border-bottom py-1">
+                <span>{{key}}</span>
+                <strong>{{ calculation[key] | number:'1.2-2' }}</strong>
+              </div>
+            </div>
+          </mat-card>
+
+          <div class="text-end mt-4">
+            <button mat-flat-button class="btn-prev me-2" (click)="prev()">Previous</button>
+            <button mat-flat-button color="primary" class="btn-next" (click)="next()">Next</button>
+          </div>
+        </mat-card>
+      </div>
+
+
+      <div *ngIf="step===3">
+        <mat-card class="inner-card">
+          <h5 class="fw-bold text-primary mb-3">Review & Confirm</h5>
+          <pre class="bg-light p-3 rounded">{{ calculation | json }}</pre>
+
+          <div class="text-end">
+            <button mat-flat-button class="btn-prev me-2" (click)="prev()">Previous</button>
+            <button mat-flat-button color="accent" class="btn-next" (click)="submit()">Confirm & Submit</button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</mat-card> -->
+<div class="outward-stepper">
+  <!-- Stepper Cards -->
+  <div class="stepper-cards d-flex justify-content-between mb-4">
+    <div class="step-card" 
+         *ngFor="let s of steps" 
+         [class.active]="step===s.num"
+         [class.completed]="completedSteps.has(s.num)"
+         (click)="goToStep(s.num)">
+      <div class="step-num">
+        <mat-icon *ngIf="completedSteps.has(s.num)">check_circle</mat-icon>
+        <span *ngIf="!completedSteps.has(s.num)">{{ s.num }}</span>
+      </div>
+      <div class="step-label">{{ s.label }}</div>
+    </div>
+  </div>
+
+  <!-- Step Contents -->
+  <div class="step-content">
+    <!-- Step 1: Account Info -->
+    <mat-card *ngIf="step===1" class="inner-card">
+      <h5 class="text-primary mb-3">Select Account</h5>
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Select Account</mat-label>
+        <mat-select [(ngModel)]="selectedAccount" (selectionChange)="showAccountDetails(selectedAccount)">
+          <mat-option *ngFor="let a of accounts" [value]="a">
+            {{ a.accountNumber }} — {{ a.product }} (₹{{ a.balance }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+   <mat-card *ngIf="accountDetails" class="account-details mt-3 p-4">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div><span class="heading">Account Number:</span> <span class="value">{{ accountDetails.accountNumber }}</span></div>
+      <div><span class="heading">CIF:</span> <span class="value">{{ accountDetails.cif }}</span></div>
+      <div><span class="heading">IFSC:</span> <span class="value">{{ accountDetails.ifsc }}</span></div>
+    </div>
+    <div class="col-md-6">
+      <div><span class="heading">Branch:</span> <span class="value">{{ accountDetails.branch }}</span></div>
+      <div><span class="heading">Product:</span> <span class="value">{{ accountDetails.product }}</span></div>
+      <div><span class="heading">Balance:</span> <span class="value">₹{{ accountDetails.balance }}</span></div>
+    </div>
+  </div>
+</mat-card>
+
+
+      <div class="d-flex justify-content-end mt-4">
+        <button mat-flat-button color="primary" (click)="next()" [disabled]="!selectedAccount">Next</button>
+      </div>
+    </mat-card>
+
+    <!-- Step 2: Transaction -->
+    <mat-card *ngIf="step===2" class="inner-card">
+      <h5 class="text-primary mb-3">Transaction Details</h5>
+      <!-- Tabs and transaction inputs will go here (Beneficiary, FTC, FCNB, Cash) -->
+      <!-- You can reuse the previous design for tabs and inputs -->
+      <div class="d-flex justify-content-between mt-4">
+        <button mat-flat-button color="accent" (click)="prev()">Previous</button>
+        <button mat-flat-button color="primary" (click)="next()">Next</button>
+      </div>
+    </mat-card>
+
+    <!-- Step 3: Review -->
+    <mat-card *ngIf="step===3" class="inner-card">
+      <h5 class="text-primary mb-3">Review & Confirm</h5>
+      <pre class="bg-light p-3 rounded">{{ calculation | json }}</pre>
+      <div class="d-flex justify-content-between mt-4">
+        <button mat-flat-button color="accent" (click)="prev()">Previous</button>
+        <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+      </div>
+    </mat-card>
+  </div>
+</div>

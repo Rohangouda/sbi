@@ -1,0 +1,24 @@
+<mat-card class="payment-card p-4 shadow-sm">
+  <h5 class="card-title text-primary fw-bold mb-4">
+    Payment Method
+  </h5>
+
+  <div class="dropdown-box">
+    <label class="fw-semibold mb-2 text-secondary">
+      Select Transaction Type:
+    </label>
+    <ng-multiselect-dropdown
+      [placeholder]="'Select Transaction Type'"
+      [settings]="dropdownSettings"
+      [data]="dropdownList"
+      [(ngModel)]="selectedItems"
+      (onSelect)="onItemSelect($event)"
+      (onDeSelect)="onItemDeSelect($event)"
+      (onSelectAll)="onSelectAll($event)">
+    </ng-multiselect-dropdown>
+  </div>
+
+  <div class="text-end mt-4">
+    <button mat-flat-button color="primary" (click)="doProceed()">Proceed</button>
+  </div>
+</mat-card>

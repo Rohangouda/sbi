@@ -1,0 +1,47 @@
+<div class="main-card shadow-lg p-4 rounded-4 mt-5">
+  <h2 class="section-title text-center mb-4">Select Transaction Type</h2>
+
+  <div class="type-selection-container">
+    <!-- BUY CARD -->
+    <mat-card 
+      class="type-card"
+      [ngClass]="{
+        'selected': selectedType === 'buy',
+        'unselected': selectedType && selectedType !== 'buy'
+      }"
+      (click)="selectType('buy')">
+      <div class="image-wrapper">
+        <img
+          src="https://skydo-assets.s3.ap-south-1.amazonaws.com/large_Export_Invoices_Should_I_Invoice_in_INR_or_Foreign_Currency_Th_249e68917d.jpg"
+          alt="Buy"
+          class="type-image"
+        />
+      </div>
+      <div class="card-text">
+        <h3>Buy (Inward)</h3>
+        <p>Send money to your account securely and easily.</p>
+      </div>
+    </mat-card>
+
+    <!-- SELL CARD -->
+    <mat-card 
+      class="type-card"
+      [ngClass]="{
+        'selected': selectedType === 'sell',
+        'unselected': selectedType && selectedType !== 'sell'
+      }"
+      (click)="selectType('sell')">
+      <div class="image-wrapper">
+        <img
+          src="https://www.goodcore.co.uk/blog/wp-content/uploads/2024/05/cash_app_banner.jpg"
+          alt="Sell"
+          class="type-image"
+        />
+      </div>
+      <div class="card-text">
+        <h3>Sell (Outward)</h3>
+        <p>Transfer or sell your foreign currency efficiently.</p>
+      </div>
+    </mat-card>
+  </div>
+</div>

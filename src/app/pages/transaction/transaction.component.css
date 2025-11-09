@@ -1,0 +1,25 @@
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card-header {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+}
+
+mat-form-field {
+  margin-bottom: 0;
+}
+
+button[mat-raised-button],
+button[mat-stroked-button] {
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #0056b3;
+  color: white;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}

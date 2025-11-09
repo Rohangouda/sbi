@@ -1,0 +1,43 @@
+/* Apply styling to a normal-width mat-card */
+.payment-card {
+  border-left: 6px solid #007bff; /* Blue accent */
+  border-radius: 12px;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Heading style - left aligned */
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #007bff;
+}
+
+/* Dropdown fix for overlap */
+::ng-deep .multiselect-dropdown {
+  width: 100% !important;
+}
+
+::ng-deep .dropdown-list {
+  position: relative !important;
+  max-height: 250px !important;
+  overflow-y: auto !important;
+  z-index: 10 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Proceed button style */
+button[mat-flat-button] {
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+/* Subtle hover */
+button[mat-flat-button]:hover {
+  background-color: #1565c0;
+  color: #fff;
+}

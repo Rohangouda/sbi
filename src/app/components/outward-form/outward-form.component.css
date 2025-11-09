@@ -1,0 +1,155 @@
+/* .inward-main-card {
+  border-left: 6px solid #1565c0;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.stepper-sidebar {
+  background: #1565c0;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.stepper-sidebar li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.stepper-sidebar li.active {
+  background: rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+.tick-icon {
+  color: #00e676;
+  font-size: 20px;
+}
+
+.inner-card {
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  background: #fff;
+}
+
+.mat-tab-group {
+  overflow: visible !important;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.btn-next {
+  background-color: #1565c0;
+  color: #fff;
+  padding: 10px 28px;
+  font-size: 15px;
+  border-radius: 8px;
+}
+
+.btn-prev {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 10px 28px;
+  font-size: 15px;
+  border-radius: 8px;
+}
+
+.btn-next:hover { background-color: #0d47a1; }
+.btn-prev:hover { background-color: #c7c7c7; }
+
+.transaction-tabs .mat-tab-label {
+  min-width: 120px;
+} */
+.outward-stepper {
+  width: 100%;
+}
+
+.stepper-cards {
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.step-card {
+  flex: 1;
+  min-width: 140px;
+  background: #fff;
+  border: 2px solid #1565c0;
+  border-radius: 12px;
+  text-align: center;
+  padding: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+}
+
+.step-card.active {
+  background: #1565c0;
+  color: #fff;
+}
+
+.step-card.completed {
+  background: #00e676;
+  color: #fff;
+  border-color: #00e676;
+}
+
+.step-num {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.step-label {
+  font-size: 14px;
+}
+
+.inner-card {
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  background: #fff;
+}
+
+.account-details {
+  border-left: 4px solid #1565c0;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+button.mat-flat-button {
+  padding: 10px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+button.mat-flat-button:hover {
+  opacity: 0.9;
+}
+.account-details {
+  border-left: 4px solid #1565c0;
+  border-radius: 12px;
+  background: #f9f9f9;
+  font-size: 15px;
+}
+
+.account-details .heading {
+  color: #1565c0;
+  font-weight: 600;
+}
+
+.account-details .value {
+  color: #555;
+  font-weight: 500;
+  margin-left: 6px;
+}

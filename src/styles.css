@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+/* 🌊 Global Blue Theme */
+body {
+  background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 100%);
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  color: #0d47a1;
+}
+
+/* Material Button Custom Theme */
+.mat-mdc-raised-button.mat-primary {
+  background: linear-gradient(90deg, #1565c0, #1e88e5);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 50px;
+  padding: 10px 28px;
+  transition: all 0.3s ease-in-out;
+}
+
+.mat-mdc-raised-button.mat-primary:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, #0d47a1, #1976d2);
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}

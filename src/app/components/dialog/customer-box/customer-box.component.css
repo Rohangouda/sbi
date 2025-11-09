@@ -1,0 +1,23 @@
+mat-card {
+  border-radius: 10px;
+  background: #fff;
+}
+
+.heading {
+  color: #1565c0;
+  font-weight: 600;
+}
+
+.value {
+  color: #555;
+  font-weight: 500;
+}
+
+table {
+  width: 100%;
+}
+
+mat-dialog-content {
+  max-height: 70vh;
+  overflow-y: auto;
+}
