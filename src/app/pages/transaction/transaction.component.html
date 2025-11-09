@@ -1,25 +1,61 @@
-<div class="container">
+<div class="container mt-5 rounded-4  bg-light p-2">
+  <!-- Buy / Sell Cards -->
   <app-accountingtype (typeSelected)="onTypeSelected($event)"></app-accountingtype>
 
-  <div *ngIf="showAccountInput || showForm" class="account-box">
-    <label>Enter Account Number:</label>
-    <input type="text" [(ngModel)]="accountNumber" placeholder="Enter account number" />
-    <button (click)="submitAccount()">Submit</button>
+  <!-- Customer Info -->
+  <div *ngIf="selectedType" class="mt-5">
+    <div class="card shadow-lg border-0">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Customer Information</h5>
+      </div>
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-md-7">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Enter CIF Number</mat-label>
+              <input matInput [(ngModel)]="cifNumber" placeholder="Enter CIF number" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2">
+            <button
+              mat-raised-button
+              color="primary"
+              class="w-100"
+              (click)="onFetchCif()"
+            >
+              Fetch
+            </button>
+          </div>
+
+          <div class="col-md-3">
+            <button
+              *ngIf="showCustomerInfoButton"
+              mat-stroked-button
+              color="accent"
+              class="w-100"
+              (click)="openCustomerDialog()"
+            >
+              Customer Info
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div *ngIf="showDropdown" class="dropdown-box">
-    <label><strong>Select Transaction Type:</strong></label>
-    <ng-multiselect-dropdown
-      [placeholder]="'Select Transaction Type'"
-      [settings]="dropdownSettings"
-      [data]="dropdownList"
-      [(ngModel)]="selectedItems"
-      (onSelect)="onItemSelect($event)"
-      (onSelectAll)="onSelectAll($event)">
-    </ng-multiselect-dropdown>
+  <!-- Payment Method Section -->
+  <div class="mt-4" *ngIf="selectedType === 'sell' && showPaymentMethod">
+    <app-payment-method (proceed)="onPaymentProceed($event)"></app-payment-method>
   </div>
 
+  <!-- Inward Form -->
+  <div class="mt-4" *ngIf="selectedType === 'buy' && showForm">
+    <app-inward-form></app-inward-form>
+  </div>
 
-  <app-form *ngIf="showForm && cifSubmitted"></app-form>
-
+  <!-- Outward Form -->
+  <div class="mt-4" *ngIf="selectedType === 'sell' && paymentProceed">
+    <app-outward-form></app-outward-form>
+  </div>
 </div>

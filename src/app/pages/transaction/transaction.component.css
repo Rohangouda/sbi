@@ -1,36 +1,25 @@
-.container {
-  text-align: center;
-  margin-top: 30px;
+.card {
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.account-box {
-  margin-top: 40px;
+.card-header {
+  background: linear-gradient(90deg, #007bff, #0056b3);
 }
 
-.account-box input {
-  padding: 8px;
-  width: 250px;
-  border-radius: 5px;
-  border: 1px solid #007bff;
-  margin-right: 10px;
+mat-form-field {
+  margin-bottom: 0;
 }
 
-.account-box button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  cursor: pointer;
+button[mat-raised-button],
+button[mat-stroked-button] {
+  border-radius: 8px;
+  font-weight: 600;
 }
 
-.account-box button:hover {
+button[mat-raised-button]:hover {
   background-color: #0056b3;
-}
-
-.dropdown-box {
-  margin-top: 30px;
-  width: 300px;
-  margin-left: auto;
-  margin-right: auto;
+  color: white;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
 }
