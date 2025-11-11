@@ -1,36 +1,90 @@
+
 .inward-main-card {
   border-left: 6px solid #1565c0;
   border-radius: 12px;
   background: #ffffff;
 }
 
+/* ======== Modern Sidebar Design ======== */
 .stepper-sidebar {
-  background: #1565c0;
+  background: linear-gradient(180deg, #1565c0, #0d47a1);
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
+  color: #fff;
+  min-height: 100%;
+  box-shadow: inset -3px 0 8px rgba(0, 0, 0, 0.1);
 }
 
-.stepper-sidebar li {
+.stepper-list {
+  margin-top: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.stepper-list li {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px 12px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  transition: 0.3s;
+  gap: 12px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.stepper-sidebar li.active {
-  background: rgba(255, 255, 255, 0.2);
+/* Step number circle */
+.step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Completed step (green circle + tick) */
+.stepper-list li.completed .step-circle {
+  background-color: #00e676;
+  color: #fff;
+}
+
+.stepper-list li.completed .step-circle mat-icon {
+  font-size: 18px;
+}
+
+/* Active step (highlighted) */
+.stepper-list li.active {
+  background: rgba(255, 255, 255, 0.15);
   font-weight: 600;
 }
 
-.tick-icon {
-  color: #00e676;
-  font-size: 20px;
+.stepper-list li.active .step-circle {
+  background-color: #fff;
+  color: #1565c0;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
 }
 
+/* Hover effect */
+.stepper-list li:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Step label text */
+.step-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  flex: 1;
+}
+
+/* ======== Cards & Buttons ======== */
 .inner-card {
   border-radius: 10px;
   padding: 16px;

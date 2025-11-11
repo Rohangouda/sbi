@@ -34,9 +34,9 @@ export class InwardFormComponent {@Input() customer: any;
   completedSteps = new Set<number>();
 
   steps = [
-    { num: 1, label: '1. Incoming Messages' },
-    { num: 2, label: '2. Account Select' },
-    { num: 3, label: '3. Review' }
+    { num: 1, label: ' Incoming Messages' },
+    { num: 2, label: ' Account Select' },
+    { num: 3, label: ' Review' }
   ];
 
   messages = Array.from({ length: 8 }).map((_, i) => ({

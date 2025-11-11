@@ -1,14 +1,28 @@
 <mat-card class="inward-main-card">
   <div class="row g-0">
     <!-- Sidebar -->
-    <div class="col-md-3 stepper-sidebar p-3 text-white">
-      <h6 class="text-center mb-3">Inward Wizard</h6>
-      <ul class="list-unstyled mt-3">
+    <div class="col-md-3 stepper-sidebar p-4 text-white">
+      <h5 class="text-center fw-bold mb-4">Inward Wizard</h5>
+
+      <ul class="list-unstyled stepper-list">
         <li *ngFor="let s of steps"
+            [attr.data-step]="s.num"
             [class.active]="step===s.num"
+            [class.completed]="completedSteps.has(s.num)"
             (click)="goToStep(s.num)">
-          <span>{{ s.label }}</span>
-          <mat-icon *ngIf="completedSteps.has(s.num)" class="tick-icon">check_circle</mat-icon>
+
+          <!-- Circle number or tick -->
+          <div class="step-circle">
+            <ng-container *ngIf="!completedSteps.has(s.num); else tick">
+              {{s.num}}
+            </ng-container>
+            <ng-template #tick>
+              <mat-icon>check</mat-icon>
+            </ng-template>
+          </div>
+
+          <!-- Step label -->
+          <span class="step-label">{{ s.label }}</span>
         </li>
       </ul>
     </div>
@@ -133,3 +147,4 @@
     </div>
   </div>
 </mat-card>
+
