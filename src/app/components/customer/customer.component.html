@@ -15,47 +15,4 @@
       <button mat-stroked-button color="accent" type="button" (click)="openCustomerInfo()" [disabled]="!fetched">Customer Info</button>
     </div>
   </form>
-
-  <div *ngIf="fetched" class="mt-3 row">
-    <div class="col-md-8">
-      <mat-card class="p-3 mb-3 left-accent">
-        <h6>Accounts</h6>
-        <div class="row g-2">
-          <div class="col-md-4">
-            <label>Account</label>
-            <select class="form-select" >
-              <option value="">Select</option>
-              <option *ngFor="let a of accounts" [value]="a.id">{{a.label}}</option>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <label>FTC</label>
-            <select class="form-select" >
-              <option value="">Select</option>
-              <option *ngFor="let f of ftc" [value]="f.id">{{f.label}}</option>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <label>FCNB</label>
-            <select class="form-select" >
-              <option value="">Select</option>
-              <option *ngFor="let c of fcnc" [value]="c.id">{{c.label}}</option>
-            </select>
-          </div>
-        </div>
-      </mat-card>
-    </div>
-
-    <div class="col-md-4">
-      <mat-card class="p-3 left-accent">
-        <h6>Selected Account</h6>
-        <div *ngIf="selectedAccount; else none">
-          <div><strong>{{selectedAccount.label}}</strong></div>
-          <div>Balance: ₹{{selectedAccount.balance | number}}</div>
-          <div>Branch: {{selectedAccount.branch}}</div>
-        </div>
-        <ng-template #none><div class="text-muted">Select an account to view</div></ng-template>
-      </mat-card>
-    </div>
-  </div>
 </mat-card>

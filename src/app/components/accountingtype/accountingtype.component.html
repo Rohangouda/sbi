@@ -1,7 +1,23 @@
-<div class="main-card shadow-lg p-4 rounded-4 mt-5">
-  <h2 class="section-title text-center mb-4">Select Transaction Type</h2>
+<!-- <div class="main-card shadow-lg p-4 rounded-4 mt-5"> -->
 
-  <div class="type-selection-container">
+  <h2 class="section-title text-center mb-4" *ngIf="!hasSelection()">
+    Select Transaction Type
+  </h2>
+
+  <!-- ✔ Mini Selected Card (after selection) -->
+  <div class="selected-mini-wrapper" *ngIf="hasSelection()">
+    <div class="selected-mini-card">
+      <span class="mini-title">{{ getSelectedLabel() }}</span>
+    </div>
+
+    <button mat-stroked-button color="warn" class="reset-btn" (click)="resetSelection()">
+      Reset
+    </button>
+  </div>
+
+  <!-- ✔ Original Full Cards (shown only before selection) -->
+  <div class="type-selection-container" *ngIf="!hasSelection()">
+
     <!-- BUY CARD -->
     <mat-card 
       class="type-card"
@@ -10,6 +26,7 @@
         'unselected': selectedType && selectedType !== 'buy'
       }"
       (click)="selectType('buy')">
+      
       <div class="image-wrapper">
         <img
           src="https://skydo-assets.s3.ap-south-1.amazonaws.com/large_Export_Invoices_Should_I_Invoice_in_INR_or_Foreign_Currency_Th_249e68917d.jpg"
@@ -17,6 +34,7 @@
           class="type-image"
         />
       </div>
+
       <div class="card-text">
         <h3>Buy (Inward)</h3>
         <p>Send money to your account securely and easily.</p>
@@ -31,6 +49,7 @@
         'unselected': selectedType && selectedType !== 'sell'
       }"
       (click)="selectType('sell')">
+      
       <div class="image-wrapper">
         <img
           src="https://www.goodcore.co.uk/blog/wp-content/uploads/2024/05/cash_app_banner.jpg"
@@ -38,10 +57,12 @@
           class="type-image"
         />
       </div>
+
       <div class="card-text">
         <h3>Sell (Outward)</h3>
         <p>Transfer or sell your foreign currency efficiently.</p>
       </div>
     </mat-card>
+
   </div>
-</div>
+<!-- </div> -->

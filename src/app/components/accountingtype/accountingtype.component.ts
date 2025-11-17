@@ -21,11 +21,31 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrl: './accountingtype.component.css'
 })
 export class AccountingtypeComponent {
- @Output() typeSelected = new EventEmitter<'buy' | 'sell'>();
+   @Output() typeSelected = new EventEmitter<'buy' | 'sell'>();
   selectedType: 'buy' | 'sell' | null = null;
 
   selectType(type: 'buy' | 'sell') {
     this.selectedType = type;
     this.typeSelected.emit(type);
+  }
+
+  // ⭐ EXTRA ADDED CODE BELOW (does NOT affect your original logic)
+
+  // To show selected card title in small preview
+  getSelectedLabel(): string {
+    if (this.selectedType === 'buy') return 'Buy (Inward)';
+    if (this.selectedType === 'sell') return 'Sell (Outward)';
+    return '';
+  }
+
+  // Reset button logic
+  resetSelection() {
+    this.selectedType = null;
+    this.typeSelected.emit(null as any); 
+  }
+
+  // Quick flag for HTML conditions
+  hasSelection(): boolean {
+    return this.selectedType !== null;
   }
 }
